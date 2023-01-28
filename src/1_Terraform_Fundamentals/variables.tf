@@ -5,5 +5,5 @@ variable "vpc_cidr" {
 
 variable "vpc_tags" {
   description = "Tags for VPC"
-  type        = map
+  type        = map(any)
 }
