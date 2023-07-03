@@ -1,0 +1,46 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description: Template to Create a VPC
+
+Metadata: 
+  AWS::CloudFormation::Interface: 
+    ParameterGroups: 
+      - 
+        Label: 
+          default: "VPC Configuration"
+        Parameters: 
+          - VPCName
+          - CIDR
+
+Parameters:
+  VPCName:
+    Type: String
+    Description: Name of VPC
+    Default: ""
+  CIDR:
+    Type: String
+    Description: VPC CIDR
+    Default: ""
+
+Rules:
+  ValidateRequiredParams:
+    Assertions:
+      - Assert: !Not [!Equals [!Ref VPCName, ""]]
+        AssertDescription: 'VPCName is required'
+      - Assert: !Not [!Equals [!Ref CIDR, ""]]
+        AssertDescription: 'CIDR is required'
+
+Resources:
+  ccVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref CIDR
+      Tags:
+        - Key: Name
+          Value: !Ref VPCName
+
+Outputs:
+  ccVPC:
+    Export:
+      Name: !Sub ${AWS::StackName}-ccVPC
+    Value: !Ref ccVPC

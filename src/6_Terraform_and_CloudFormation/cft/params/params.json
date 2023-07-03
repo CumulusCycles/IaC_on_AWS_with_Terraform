@@ -1,0 +1,10 @@
+[
+    {
+        "ParameterKey": "VPCName",
+        "ParameterValue": "ccVPC"
+    },
+    {
+        "ParameterKey": "CIDR",
+        "ParameterValue": "10.0.0.0/16"
+    }
+]
