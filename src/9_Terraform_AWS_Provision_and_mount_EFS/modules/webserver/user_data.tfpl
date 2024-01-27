@@ -1,0 +1,13 @@
+#!/bin/bash
+sudo su
+yum update -y 
+
+yum install -y httpd 
+service httpd start
+
+yum install amazon-efs-utils -y
+
+mkdir ${file_system_path}
+mount ${mount_target_dns_name}:/ ${file_system_path}
+
+echo "<h1>Hello, World! v${server_index}.0</h1>" > ${file_system_path}/index.html 
